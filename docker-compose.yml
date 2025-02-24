@@ -1,0 +1,27 @@
+services:
+  app:
+    image: jupyterhub:cuda-12.4.1
+    ports:
+      - 8000:8000
+    security_opt:
+      - seccomp:unconfined
+    #extra_hosts:
+    #  - "tsinghua.pip:192.168.164.78"
+    #volumes:
+    #  - /data/jupyterhub/srv:/srv
+    #  - /data/jupyterhub/srv/jupyterhub.sqlite:/jupyterhub.sqlite
+    #  - /data/jupyterhub/srv/jupyterhub_cookie_secret:/jupyterhub_cookie_secret
+    #  - ./data/home:/home
+    #  - ./data/kernel.json:/opt/conda/share/jupyter/kernels/python3/kernel.json
+    #  - ./ramdisk:/ramdisk
+    #  - ./pip.conf:/root/.config/pip/pip.conf:ro
+    #shm_size: '250g'
+    #network_mode: 'host'
+    #restart: always
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
