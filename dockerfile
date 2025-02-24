@@ -36,4 +36,4 @@ RUN useradd -m -s /bin/bash admin && echo "admin:admin" | chpasswd
 # 复制配置文件
 COPY jupyterhub_config.py /srv/jupyterhub/jupyterhub_config.py
 
-CMD ["jupyterhub", "-f", "/srv/jupyterhub/jupyterhub_config.py"]
+CMD ["/opt/conda/envs/py310/bin/python", "-m", "jupyterhub", "-f", "/srv/jupyterhub/jupyterhub_config.py"]
