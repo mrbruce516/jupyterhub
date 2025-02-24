@@ -2,7 +2,7 @@ FROM nvidia/cuda:12.4.1-cudnn-devel-ubuntu22.04
 
 # 安装必要的系统包
 RUN apt-get update && \
-    apt-get install -y wget curl python3 python3-pip && \
+    apt-get install -y wget curl && \
     apt-get autoremove -y && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
@@ -16,16 +16,16 @@ RUN /opt/conda/bin/conda init bash
 
 # 创建 Conda 环境并安装依赖
 RUN conda create -n py310 python=3.10 -y && \
-    /opt/conda/envs/py310/bin/python -m pip install ipykernel && \
+    /opt/conda/envs/py310/bin/python -m pip install ipykernel \
+    jupyterhub notebook ipywidgets \
+    jupyterhub-nativeauthenticator jupyterlab-language-pack-zh-CN jupyter_contrib_nbextensions \
+    argparse torch torchvision torchaudio \
+    sympy mamba_ssm && \
+    /opt/conda/envs/py310/bin/python -m pip cache purge && \
     /opt/conda/envs/py310/bin/python -m ipykernel install --user --name=python3.10 --display-name "Python 3.10" && \
     conda clean -afy
 
-# 安装 Python 和 Node.js 相关工具
-RUN pip install jupyterhub notebook ipywidgets \
-    jupyterhub-nativeauthenticator jupyterlab-language-pack-zh-CN jupyter_contrib_nbextensions \
-    argparse torch torchvision torchaudio -f https://download.pytorch.org/whl/torch_stable.html && \
-    pip install sympy mamba_ssm && \
-    pip cache purge
+# 安装 Node.js 相关工具
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
     apt-get install -y nodejs && \
     npm install -g configurable-http-proxy
