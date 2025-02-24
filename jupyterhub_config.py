@@ -65,7 +65,7 @@ c.JupyterHub.template_paths = [f"{os.path.dirname(nativeauthenticator.__file__)}
 c.JupyterHub.services = [
     {
         'name': 'idle-culler',
-        'command': ['python3', '-m', 'jupyterhub_idle_culler', '--timeout=3600'],
+        'command': ['/opt/conda/envs/py310/bin/python', '-m', 'jupyterhub_idle_culler', '--timeout=3600'],
         'admin': True  # 1.5.0 需要服务管理员权限
     }
 ]
