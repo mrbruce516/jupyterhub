@@ -17,7 +17,7 @@ RUN /opt/conda/bin/conda init bash
 # 创建 Conda 环境并安装依赖
 RUN conda create -n py310 python=3.10 -y && \
     /opt/conda/envs/py310/bin/python -m pip install ipykernel \
-    jupyterhub notebook ipywidgets \
+    jupyterhub notebook ipywidgets jupyterhub_idle_culler \
     jupyterhub-nativeauthenticator jupyterlab-language-pack-zh-CN jupyter_contrib_nbextensions \
     argparse torch torchvision torchaudio \
     sympy mamba_ssm && \

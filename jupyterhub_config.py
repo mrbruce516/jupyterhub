@@ -18,7 +18,7 @@ c.Spawner.default_url = '/lab'
 c.Spawner.notebook_dir = '~'
 
 # 设置启动命令为 JupyterLab
-c.Spawner.cmd = ['jupyter-labhub']
+c.Spawner.cmd = ['/opt/conda/envs/py310/bin/jupyter-labhub']
 
 # 允许创建系统用户
 c.LocalAuthenticator.create_system_users = True
