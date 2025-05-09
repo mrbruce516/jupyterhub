@@ -18,8 +18,7 @@ RUN /opt/conda/bin/conda init bash
 RUN conda create -n py311 python=3.11 -y && \
     /opt/conda/envs/py311/bin/python -m pip install ipykernel \
     jupyterhub notebook ipywidgets jupyterhub_idle_culler \
-    jupyterhub-nativeauthenticator jupyterlab-language-pack-zh-CN jupyter_contrib_nbextensions \
-    argparse sympy mamba_ssm && \
+    jupyterhub-nativeauthenticator jupyterlab-language-pack-zh-CN jupyter_contrib_nbextensions && \
     /opt/conda/envs/py311/bin/python -m pip cache purge && \
     /opt/conda/envs/py311/bin/python -m ipykernel install --user --name=python3.11 --display-name "Python 3.11" && \
     conda clean -afy
